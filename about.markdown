@@ -12,6 +12,6 @@ I like learning about things.
 
 This is my personal portfolio site, I am not really sure what I'll put on it.
 
-For now I have set up a nice summary of all the important projects I've worked on, and a showcase of some smaller things I'm proud of.
+For now I have set up a nice summary of all the important projects I've worked on, and a showcase of some smaller things I'm also proud of.
 
 If you've taken the time to read all this, thank you!

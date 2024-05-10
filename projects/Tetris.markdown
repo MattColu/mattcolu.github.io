@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Tetris"
-categories: project game
+categories: project game C
 ---
 This project was proposed as an alternative to taking the Computer Architectures exam. The position was open for multiple people, and was cooperative for its first half and individual for the second half.
 
@@ -45,10 +45,10 @@ I was originally planning on building a NES emulator, given the similar specs an
 
 Nonetheless, I was able to "recycle" some principles of old 8-bit systems, such as tiles and color palettes.
 
-*Due to hardware limitations, old consoles couldn't address single pixels individually, having to rely on tiles: indivisible square blocks of pixels.*
+> *Due to hardware limitations, old consoles couldn't address single pixels individually, having to rely on tiles: indivisible square blocks of pixels.*
 *Moreover, every tile could only display a very limited amount of colors out of the (already limited) system palette.*
 
-*These limitations combined, however, save great amounts of storage space (once a crucial aspect of game developement), as it's only necessary to store one copy of the graphics data, which can be "tinted" at will simply by changing the palette the tile is being rendered with.*
+> *These limitations combined, however, save great amounts of storage space (once a crucial aspect of game developement), as it's only necessary to store one copy of the graphics data, which can be "tinted" at will simply by changing the palette the tile is being rendered with.*
 
 Tetris's block-based nature easily allows for a tile-based grid, and the recurring shapes (for both blocks and backgrounds) benefit from palette-based coloring.
 
@@ -61,9 +61,9 @@ However, the inherently static nature of Tetris's playfield and its grid-based i
 
 Another aspect that I wanted to carry over from my NES research, also being a personal interest of mine, was sound generation.
 
-*As previously mentioned, up until the rise of CD-based consoles (PS1, 1996), storage space was an extremely sought-after commodity. This rendered impossible the use of [streamed music](https://en.wikipedia.org/wiki/Streaming_audio_in_video_games) (like MP3 files), and as a result marked the golden days of instruction-based music.*
+> *As previously mentioned, up until the rise of CD-based consoles (PS1, 1996), storage space was an extremely sought-after commodity. This rendered impossible the use of [streamed music](https://en.wikipedia.org/wiki/Streaming_audio_in_video_games) (like MP3 files), and as a result marked the golden days of instruction-based music.*
 
-*Instruction (or sequence)-based music, not unlike [MIDI](https://en.wikipedia.org/wiki/MIDI), works by sending instructions to a console's sound co-processor or [PSG](https://en.wikipedia.org/wiki/Programmable_sound_generator), which synthetizes the audio output in real time.*
+> *Instruction (or sequence)-based music, not unlike [MIDI](https://en.wikipedia.org/wiki/MIDI), works by sending instructions to a console's sound co-processor or [PSG](https://en.wikipedia.org/wiki/Programmable_sound_generator), which synthetizes the audio output in real time.*
 
 As with graphics, all sound generation and mixing has to be performed in-software, by the processor.
 However, compared to graphics, it is a much less intensive workload, although executed much more frequently.
