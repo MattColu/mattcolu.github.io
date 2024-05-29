@@ -52,16 +52,16 @@ I was originally planning on building a NES emulator, given the similar specs an
 
 Nonetheless, I was able to "recycle" some principles of old 8-bit systems, such as tiles and color palettes.
 
-> *Due to hardware limitations, old consoles couldn't address single pixels individually, having to rely on tiles: indivisible square blocks of pixels.*  
-> *Moreover, every tile could only display a very limited amount of colors out of the (already limited) system palette.*
+> Due to hardware limitations, old consoles couldn't address single pixels individually, having to rely on tiles: indivisible square blocks of pixels.  
+> Moreover, every tile could only display a very limited amount of colors out of the (already limited) system palette.
 > 
-{% include figure.html src="https://nesdoug.com/wp-content/uploads/2015/11/nes-color-palette2.png" alt="NES palette" caption="The eye-watering entire color capabilities of the NES" %}
+> {% include figure.html src="https://nesdoug.com/wp-content/uploads/2015/11/nes-color-palette2.png" alt="NES palette" caption="The eye-watering entire color capabilities of the NES" %}
 > 
-{% include figure.html src="/img/tetris/sprite_palette.png" alt="A sprite and its palette" caption="An 8x8 sprite and the palette it's being rendered with" %}
+> {% include figure.html src="/img/tetris/sprite_palette.png" alt="A sprite and its palette" caption="An 8x8 sprite and the palette it's being rendered with" %}
 > 
-> *These limitations combined, however, save great amounts of storage space (once a crucial aspect of game developement), as it's only necessary to store one copy of the graphics data, which can be "tinted" at will simply by changing the palette the tile is being rendered with.*
-
-{% include figure.html src="/img/tetris/smb_cloud_bush.png" alt="In Super Mario Bros. clouds and bushes are the same thing" caption="In Super Mario Bros. for the NES, clouds and bushes share sprites, they just use different palettes" %}
+> These limitations combined, however, save great amounts of storage space (once a crucial aspect of game developement), as it's only necessary to store one copy of the graphics data, which can be "tinted" at will simply by changing the palette that tile is being rendered with.
+>
+> {% include figure.html src="/img/tetris/smb_cloud_bush.png" alt="Clouds and bushes" caption="In Super Mario Bros. for the NES, clouds and bushes share sprites, they just use different palettes" %}
 
 Tetris's block-based nature easily allows for a tile-based grid, and the recurring shapes (for both blocks and backgrounds) benefit from palette-based coloring.
 
@@ -70,17 +70,17 @@ The normal approach of a full screen refresh every frame would have brought the 
 
 However, the inherently static nature of Tetris's playfield and its grid-based implementation, allow specific patching of the falling blocks, thus minimizing screen writes as much as possible.
 
-{% include gif-like.html w="45%" src="/img/tetris/patching.mp4" caption="Block rendering and patching" %}
+{% include gif-like.html w="45%" src="/img/tetris/patching.mp4" alt="Block rendering" caption="Block rendering and patching" %}
 
 ### Audio
 
 Another aspect that I wanted to carry over from my NES research, also being a personal interest of mine, was sound generation.
 
-> *As previously mentioned, up until the rise of CD-based consoles (PS1, 1996), storage space was an extremely sought-after commodity. This rendered impossible the use of [streamed music](https://en.wikipedia.org/wiki/Streaming_audio_in_video_games) (like MP3 files), and as a result marked the golden days of instruction-based music.*
+> As previously mentioned, up until the rise of CD-based consoles (PS1, 1996), storage space was an extremely sought-after commodity. This rendered impossible the use of [streamed music](https://en.wikipedia.org/wiki/Streaming_audio_in_video_games) (like MP3 files), and as a result marked the golden days of instruction-based music.
+>
+> Instruction (or sequence)-based music, not unlike [MIDI](https://en.wikipedia.org/wiki/MIDI), works by sending instructions to a console's sound co-processor or [PSG](https://en.wikipedia.org/wiki/Programmable_sound_generator), which synthesizes the audio output in real time.
 
-> *Instruction (or sequence)-based music, not unlike [MIDI](https://en.wikipedia.org/wiki/MIDI), works by sending instructions to a console's sound co-processor or [PSG](https://en.wikipedia.org/wiki/Programmable_sound_generator), which synthetizes the audio output in real time.*
-
-As with graphics, all sound generation and mixing has to be performed in-software, by the processor.
+As with graphics, all sound generation and mixing has to be performed in-software, by the processor.  
 However, compared to graphics, it is a much less intensive workload, although executed much more frequently.
 
 Producing a note is as simple as sending a series of volume levels to the speaker's [DAC](https://en.wikipedia.org/wiki/Digital-to-analog_converter), while mixing just involves summing all volumes together and eventually rescaling the result.

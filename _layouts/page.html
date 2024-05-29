@@ -1,0 +1,19 @@
+---
+layout: default
+---
+
+<script src="/js/wikipedia-preview.umd.cjs"></script>
+
+<article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">{{ page.title | escape }}</h1>
+  </header>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+</article>
+
+<script type="text/javascript">wikipediaPreview.init({detectLinks: true});</script>

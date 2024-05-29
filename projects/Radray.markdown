@@ -3,7 +3,7 @@ layout: page
 title: "Parallelizing Radray"
 categories: group project CUDA Python
 ---
-This project comprised the entire final exam of the GPU Programming course. It was a three-person group project, for which we mostly took turns working in pairs, due to different (but equally challenging) exam schedules.
+This project comprised the entire final exam of the GPU Programming course. It was a three-person group project, for which we mostly took turns working in pairs, due to our separate (but equally challenging) exam schedules.
 
 We were initially given total freedom in deciding what to create, as long as it would leverage parallelism, but were ultimately tasked by the Professor with creating a more efficient, parallel version of an already existing piece of software.
 
@@ -27,9 +27,9 @@ Both the original and our version work as follows:
 
 Out of these steps, I/O on files is inherently sequential, whereas generating and calculating the energies of the points is a task that can benefit from parallel execution.
 
-> *This problem is actually an example of an "embarassingly parallel" task: since the calculations at every point are completely independent from each other (energy only depends from the point-ray distance, which is fixed for each point), parallelization leads to a speedup that scales with the number of parallel processing units.*
-
-> *However, a generic application can benefit from parallelization only to some extent, as most involve some sort of sequential operations, be it reading from a file or performing calculations that depend on one another. This is known as [Amdahl's Law](https://en.wikipedia.org/wiki/Amdahl%27s_law).*
+> This problem is actually an example of an "embarassingly parallel" task: since the calculations at every point are completely independent from each other (energy only depends from the point-ray distance, which is fixed for each point), parallelization leads to a speedup that scales with the number of parallel processing units.
+>
+> However, a generic application can benefit from parallelization only to some extent, as most involve some sort of sequential operations, be it reading from a file or performing calculations that depend on one another. This is known as [Amdahl's Law](https://en.wikipedia.org/wiki/Amdahl%27s_law).
 
 ## The Approach
 
@@ -43,17 +43,21 @@ Upon implementing a parallel version of the point generation function, we notice
 
 This is ultimately due to the shape of the components: following the initial approximation that all the points inside a component's bounding box are valid, in a sequential program it's easy to add a check for each
 
-```py
-for point in all_points_of_bounding_box:
-    if point in component:
-        generate_point_info()
-```
+{% highlight python %}
+    for point in all_points_of_bounding_box
+        if point in component
+            generate_point_info()
+{% endhighlight %}
 
 However, with a parallel program, every [thread](https://en.wikipedia.org/wiki/Thread_(computing)) executes the same program, so without knowing beforehand which point will actually be valid, every thread has to start, check, and only eventually go on with the calculations and produce a valid value.
 
 Depending on the bounding-box-volume/actual-volume ratio of the components, this can produce a sparse array (i.e. an array for which most of its elements are empty), which is highly inefficient, considering that memory transfers between system RAM and GPU RAM (and vice versa) are one of the most common and impactful bottlenecks in parallel computations.
 
+{% include figure.html src="/img/radray/bounding_box.png" w="50%" alt="A sub-optimal component shape" caption="A sub-optimal component: its volume is a fraction of its bounding box's volume"%}
+
 We solved this issue by adding an extra one-time pre-computation step, which reduces all complex shapes to simple boxes, guaranteeing that all the points are valid and thus yielding the smallest possible array.
+
+{% include figure.html src="/img/radray/decomposition.png" w="75%" alt="Polygon decomposition algorithm" caption="An example of the polygon decomposition algorithm"%}
 
 ### Almost-parallel computation
 
@@ -73,12 +77,12 @@ An OpenGL visualization would have granted a massive speedup in both visualizati
 
 ## The Result
 
-Our final implementation clocked in at a respectable 25x speedup relative to the sequential version.
+Our final implementation clocked in at a respectable 25× speedup relative to the sequential version.
 
 While it's nowhere near the amount of threads that were used (i.e. the theoretical speedup), it's important to keep in mind that no matter the speedup in the parallel sections, it's ultimately the sequential sections that matter the most for the overall execution time.
 
 Moreover, despite it not being our first choice as a project (any choice to be fair), we were ultimately successful in tackling such a cryptic project on an obscure and complicated topic, and turning it into a success and (perhaps more importantly) a learning experience in parallel computing.
 
----
+___
 
-I would like to once again thank [Francesco](https://github.com/Francesco-Carlucci) and [Alessio](https://github.com/alessiocaviglia) for their invaluable effort to this common cause.
+I would like to thank [Francesco](https://github.com/Francesco-Carlucci) and [Alessio](https://github.com/alessiocaviglia) once again for their invaluable effort to this common cause.
