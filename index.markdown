@@ -4,3 +4,6 @@
 
 layout: home
 ---
+<div style="font-size:250px; margin: auto; text-align: center; color:#dedede">
+WIP
+</div>

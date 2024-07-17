@@ -15,7 +15,7 @@ The main objective was to develop a library for communicating using the [CAN pro
 
 The board that we were given is the same that was used during lab practice for the course, where it is employed as a contact point between [high-level software](https://en.wikipedia.org/wiki/High-level_programming_language) and bare electronics.
 
-{% include gif-like.html w="75%" src="/img/tetris/board.mp4" %} 
+{% include gif-like.html w="75%" src="/img/tetris/board.mp4" %}
 
 It features a 32-bit processor, a touch display and a decent array of input peripherals and communication interfaces: great for didactical purposes, but not particularly useful outside of that (also given the convenience of other more powerful and flexible general purpose SoCs like the Raspberry Pi).
 
@@ -98,7 +98,7 @@ I ended up working unofficially on this project during the summer to bring it on
 ___
 
 <small><small>
-<!-- Original LandTiger 3D model by -->  
+Original LandTiger 3D model by Federico and [Gabriele Filipponi](https://github.com/gabrielefilipp)  
 NES palette taken from <https://nesdoug.com/2018/09/05/05-palettes/>  
 Sprite example Link head adapted from <https://georgjz.github.io/snesaa03/>
 </small></small>
