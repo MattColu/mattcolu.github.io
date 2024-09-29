@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "Tetris"
+date: "March 2022 - September 2022"
 categories: project game C
 ---
 This project was proposed as an alternative to taking the Computer Architectures exam. The position was open for multiple people, and was cooperative for its first half and individual for the second half.
@@ -15,7 +16,7 @@ The main objective was to develop a library for communicating using the [CAN pro
 
 The board that we were given is the same that was used during lab practice for the course, where it is employed as a contact point between [high-level software](https://en.wikipedia.org/wiki/High-level_programming_language) and bare electronics.
 
-{% include gif-like.html w="75%" src="/img/tetris/board.mp4" %}
+{% include gif-like.html w="75%" src="/media/tetris/board.mp4" %}
 
 It features a 32-bit processor, a touch display and a decent array of input peripherals and communication interfaces: great for didactical purposes, but not particularly useful outside of that (also given the convenience of other more powerful and flexible general purpose SoCs like the Raspberry Pi).
 
@@ -33,13 +34,13 @@ Considering that everything had to be recreated from scratch, we were suggested 
 
 I opted for Tetris, given the all in all simple game mechanics at its core, and the multiplayer capabilities that were part of the game from as early as 1989.
 
-{% include figure.html src="/img/tetris/splash.png" w="66%" alt="Tetris arcade splash screen" caption="Splash screen as seen in one of the arcade editions"%}
+{% include figure.html src="/media/tetris/splash.png" w="66%" alt="Tetris arcade splash screen" caption="Splash screen as seen in one of the arcade editions"%}
 
 ### Connectivity
 
 The CAN library that I wrote allows up to 7 addressable devices and "unlimited" unaddressable spectators. However, one important aspect to consider is that every board needs to be powered, connected with 4 wires and arranged in a loop, **heavily** limiting the physically viable size of multiplayer matches (and the respective testing extents).
 
-{% include figure.html src="/img/tetris/boards_connected.png" w="50%" alt="4 boards" caption="A connection example with 4 boards (power cables are absent from the image)"%}
+{% include figure.html src="/media/tetris/boards_connected.png" w="50%" alt="4 boards" caption="A connection example with 4 boards (power cables are absent from the image)"%}
 
 The first device to open the lobby menu is assigned the role of master, from that moment it will be in charge of address negotiation. Address negotiation is the only task that distinguishes the master from all other devices, making it a hybrid master-slave/peer-to-peer architecture.
 
@@ -57,11 +58,11 @@ Nonetheless, I was able to "recycle" some principles of old 8-bit systems, such 
 > 
 > {% include figure.html src="https://nesdoug.com/wp-content/uploads/2015/11/nes-color-palette2.png" alt="NES palette" caption="The eye-watering entire color capabilities of the NES" %}
 > 
-> {% include figure.html src="/img/tetris/sprite_palette.png" alt="A sprite and its palette" caption="An 8x8 sprite and the palette it's being rendered with" %}
+> {% include figure.html src="/media/tetris/sprite_palette.png" alt="A sprite and its palette" caption="An 8x8 sprite and the palette it's being rendered with" %}
 > 
 > These limitations combined, however, save great amounts of storage space (once a crucial aspect of game developement), as it's only necessary to store one copy of the graphics data, which can be "tinted" at will simply by changing the palette that tile is being rendered with.
 >
-> {% include figure.html src="/img/tetris/smb_cloud_bush.png" alt="Clouds and bushes" caption="In Super Mario Bros. for the NES, clouds and bushes share sprites, they just use different palettes" %}
+> {% include figure.html src="/media/tetris/smb_cloud_bush.png" alt="Clouds and bushes" caption="In Super Mario Bros. for the NES, clouds and bushes share sprites, they just use different palettes" %}
 
 Tetris's block-based nature easily allows for a tile-based grid, and the recurring shapes (for both blocks and backgrounds) benefit from palette-based coloring.
 
@@ -70,7 +71,7 @@ The normal approach of a full screen refresh every frame would have brought the 
 
 However, the inherently static nature of Tetris's playfield and its grid-based implementation, allow specific patching of the falling blocks, thus minimizing screen writes as much as possible.
 
-{% include gif-like.html w="45%" src="/img/tetris/patching.mp4" alt="Block rendering" caption="Block rendering and patching" %}
+{% include gif-like.html w="45%" src="/media/tetris/patching.mp4" alt="Block rendering" caption="Block rendering and patching" %}
 
 ### Audio
 
@@ -89,12 +90,38 @@ In order to ensure smooth signals being sent to the speaker, the easier and most
 
 After devising a suitable data structure to save notes, volumes, waveforms and effects, for the sake of convenience, I decided to structure the song file in a form that's reminiscent of [tracker software](https://en.wikipedia.org/wiki/Music_tracker).
 
-{% include figure.html w="150%" src="/img/tetris/trackers.png" alt="My tracker-like C file and a real tracker" caption="A side-by-side of my tracker-like C file and Famitracker, the most popular tracker for the NES soundchip" %}
+{% include figure.html w="150%" src="/media/tetris/trackers.png" alt="My tracker-like C file and a real tracker" caption="A side-by-side of my tracker-like C file and Famitracker, the most popular tracker for the NES soundchip" %}
+
+<div style="margin:auto; text-align: center">
+    <figure>
+        <audio controls>
+            <source src="/media/tetris/a_theme.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+        </audio>
+        <audio controls>
+            <source src="/media/tetris/b_theme.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+        </audio>
+    <figcaption>A rendition of the classic Tetris A and B themes</figcaption>
+    </figure>
+</div>
+
+### GUI
+
+Every aspect of the User Interface was designed and implemented from scratch. It was a grueling task, which I don't wish upon anyone: the only functionality provided by the LCD screen's library was text (of fixed size). Every other aspect (sprites, layouts, object alignment, interactable elements, menu highlighting effects) had to be implemented manually.
 
 ## The Result
 
 I ended up working unofficially on this project during the summer to bring it on par with my initial expectations, and I am very pleased with the final result, as it is almost a fully-fledged Tetris port with little to no compromises despite the challenging platform we had to work with.
 
+<div style="margin:auto; text-align: center">
+    <figure>
+        <iframe src="https://drive.google.com/file/d/1Os2hd0Nc4xrF_XHtmU3IijbjE22_W6rJ/preview" width="640" height="360" allowfullscreen="allowfulscreen"></iframe>
+        <figcaption>A gameplay demonstration of the single player and multiplayer modes, settings menu and music.
+        <br/> Two other boards are off-screen and are operated by me. Each player has a miniature view of all opponents and an active target (flashing frame, not demonstrated).
+        <br/> As an aside, since the CPU processes both graphics and audio, and screen updates are very time-consuming (despite optimizations), the audio noticeably stops when clearing lines.</figcaption>
+    </figure>
+</div>
 ___
 
 <small><small>
