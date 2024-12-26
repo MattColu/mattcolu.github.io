@@ -1,7 +1,12 @@
 ---
 layout: page
-title: "Hopper"
-categories: group project Python AI Reinforcement-Learning
+title: Hopper
+start: November 2022
+end: September 2023
+duration: 4
+languages: Python, PyTorch
+tags: Group Project, AI, Reinforcement Learning, Blender 
+media: yes
 ---
 
 This project was part of the Advanced Machine Learning exam.  
@@ -12,20 +17,23 @@ It was a three-people group project, each of us working on a specific section of
 
 The aim of this project was to teach a simulated leg how to hop in 2D.
 
-{% include gif-like.html w="45%" src="/media/hopper/struggling.mp4" caption="It doesn't know how to hop yet. Everyone has to start somewhere, right?"%}
+{% include gif-like.html w="45%" src="/assets/media/hopper/struggling.mp4" caption="It doesn't know how to hop yet. Everyone has to start somewhere, right?"%}
 In order do this we employed a special kind of machine learning algorithm called [Reinforcement Learning](https://en.wikipedia.org/wiki/Reinforcement_learning), more specifically its *deep* variant because of its use in conjunction with a neural network.
 
-> ## Reinforcement Learning
->
-> The term *"Reinforcement Learning"*, be it of the *deep* kind or not, generally refers to a family of machine learning algorithms that build behaviors primarily by means of rewards and punishments.
->
-> - The **agent** - the entity that learns - may know some details about itself, but knows nothing about the world around it except for the consequences of its actions.
-> - The **environment** provides **observations** to the agent to base its decisions upon, and dispenses **rewards**  after the choices have been made.
-> - The **objective** of the agent is to maximize rewards, so naturally it will try and repeat the actions that yielded positive results.  
-> However, it is up to the programmer to decide if the agent should prioritize short-term rewards, or value actions that lead to higher rewards in the long run. According to [Bellman's Equation](https://en.wikipedia.org/wiki/Bellman_equation) this is known as *discount factor*.
->
-> Reinforcement Learning does not produce behaviors that outperform handcrafted algorithms, since as a trial-and-error method it is an inherently imperfect process. However, it is often the only way to obtain a suitable policy, especially for very complex tasks, or tasks for which an optimal formula or algorithm do not exist.  
-> The task of the programmer becomes a matter of fine-tuning rewards and goals, thus leaving the bulk of the "figuring out" effort to the agent, which can take a long time to converge to a satisfying result.
+{% capture RL %}
+
+The term *"Reinforcement Learning"*, be it of the *deep* kind or not, generally refers to a family of machine learning lgorithms that build behaviors primarily by means of rewards and punishments.
+
+- The **agent** - the entity that learns - may know some details about itself, but knows nothing about the world around it xcept for the consequences of its actions.
+- The **environment** provides **observations** to the agent to base its decisions upon, and dispenses **rewards**  after he choices have been made.
+- The **objective** of the agent is to maximize rewards, so naturally it will try and repeat the actions that yielded ositive results.  
+However, it is up to the programmer to decide if the agent should prioritize short-term rewards, or value actions that lead o higher rewards in the long run. According to [Bellman's Equation](https://en.wikipedia.org/wiki/Bellman_equation) this is nown as *discount factor*.
+
+Reinforcement Learning does not produce behaviors that outperform handcrafted algorithms, since as a trial-and-error method it is an inherently imperfect process. However, it is often the only way to obtain a suitable policy, especially for very complex tasks, or tasks for which an optimal formula or algorithm do not exist.  
+The task of the programmer becomes a matter of fine-tuning rewards and goals, thus leaving the bulk of the "figuring out" effort to the agent, which can take a long time to converge to a satisfying result.
+
+{% endcapture %}
+{% include blockquote.html type="note" title="Reinforcement Learning" content=RL %}
 
 ## The Leg
 
@@ -34,16 +42,20 @@ These scenes are physically simulated by [MuJoCo](https://mujoco.org/), a lightw
 
 The greater aim of this project was actually to showcase the effectiveness of Domain Randomization for robotic control tasks.
 
-> ### Domain Randomization
->
-> Domain Randomization refers to a technique similar to [Domain Adaptation](https://en.wikipedia.org/wiki/Domain_adaptation) (i.e. a procedure that follows regular training in case the training application does not coincide with the actual use case). It extends the agent's experience of the environment by randomizing key aspects of the latter. 
-> While it isn't as simple or as easy to implement as image [Data Augmentation](https://en.wikipedia.org/wiki/Data_augmentation#Data_augmentation_for_image_classification) (e.g. rotating, mirroring, cropping images to help image-based networks), the procedure is somewhat similar: it consists in randomizing features of the training simulation in order to (hopefully) real-world-proof the model that was trained on it.
->
-> {% include figure.html src="/media/hopper/da_vs_dr.png" alt="Domain Adaptation vs Domain Randomization" caption="The objective of Domain Randomization is not to switch the training domain (like Domain Adaptation), but rather to extend it in order for it to eventually encompass the target domain (in our case, the real world)" %}
->
-> This approach is often used for robotic control tasks, where real-world imperfections are hard to model accurately, or in case a very high variability is to be expected.
->
-> {% include figure.html src="/media/hopper/openai_dr.png" w="66%" alt="Visual Domain Randomization" caption="Domain Randomization applied to visual observations in " linktext="OpenAI's paper" href="https://arxiv.org/abs/1703.06907" postlink=". The agent is prepared to the real world through a myriad of randomized simulated worlds." %}
+{% capture DR %}
+
+Domain Randomization refers to a technique similar to [Domain Adaptation](https://en.wikipedia.org/wiki/Domain_adaptation) (i.e. a procedure that follows regular training in case the training application does not coincide with the actual use case). It extends the agent's experience of the environment by randomizing key aspects of the latter. 
+While it isn't as simple or as easy to implement as image [Data Augmentation](https://en.wikipedia.org/wiki/Data_augmentation#Data_augmentation_for_image_classification) (e.g. rotating, mirroring, cropping images to help image-based networks), the procedure is somewhat similar: it consists in randomizing features of the training simulation in order to (hopefully) real-world-proof the model that was trained on it.
+
+{% include figure.html src="/assets/media/hopper/da_vs_dr.png" alt="Domain Adaptation vs Domain Randomization" caption="The objective of Domain Randomization is not to switch the training domain (like Domain Adaptation), but rather to extend it in order for it to eventually encompass the target domain (in our case, the real world)" %}
+
+This approach is often used for robotic control tasks, where real-world imperfections are hard to model accurately, or in case a very high variability is to be expected.
+
+{% include figure.html src="/assets/media/hopper/openai_dr.png" w="66%" alt="Visual Domain Randomization" caption="Domain Randomization applied to visual observations in [OpenAI's paper](https://arxiv.org/abs/1703.06907).
+The agent is prepared to the real world through a myriad of randomized simulated worlds" %}
+
+{% endcapture %}
+{% include blockquote.html type="note" title="Domain Randomization" content=DR %}
 
 ## The Implementation
 
@@ -101,11 +113,11 @@ The pose estimation library, in turn uses another neural network ([SCNet](https:
 
 After training the network on the dataset (actually just [fine-tuning](https://en.wikipedia.org/wiki/Fine-tuning_(deep_learning)) it), the trained model is used to infer the position of the keypoints (top of the torso, waist, knee, ankle, tip of the foot) for each image frame.
 
-{% include figure.html src="/media/hopper/hopper_keypoints.png" alt="Keypoints on the hopper" caption="Inferred positions of the 5 keypoints"%}
+{% include figure.html src="/assets/media/hopper/hopper_keypoints.png" alt="Keypoints on the hopper" caption="Inferred positions of the 5 keypoints"%}
 
 This and the previous frame's positions are then used to estimate all angles and velocities (The almost orthogonal camera angle allows a 1:1 a mapping between image and world coordinates).
 
-{% include figure.html src="/media/hopper/pipeline.png" alt="Pose Estimation pipeline" caption="A diagram of the final Pose Estimation pipeline" %}
+{% include figure.html src="/assets/media/hopper/pipeline.png" alt="Pose Estimation pipeline" caption="A diagram of the final Pose Estimation pipeline" %}
 
 #### MLP
 
@@ -118,17 +130,17 @@ Unfortunately, the final result were quite underwhelming.
 Due in part to the dataset being created as an approximation in Blender instead of using the actual physics engine, the Pose Estimation network didn't perform as well as I had hoped.  
 This lead to low accuracy in keypoint estimation, which in turn caused an increased learning difficulty to the agent.
 
-{% include figure.html src="/media/hopper/reconstructed.png" alt="Reconstructed measurements" caption="A summary of original (🟧) and reconstructed (🟦) values over the length of an episode. Some measurements (namely absolute x and z velocity) could not be inferred due to the camera being anchored to the agent" %}
+{% include figure.html src="/assets/media/hopper/reconstructed.png" alt="Reconstructed measurements" caption="A summary of original (🟧) and reconstructed (🟦) values over the length of an episode. Some measurements (namely absolute x and z velocity) could not be inferred due to the camera being anchored to the agent" %}
 
 ## The Results
 
 In conclusion, Domain Randomization worsens absolute performance (since the task *is* more difficult after all), but helps in reducing the effect of the [Domain Gap](#domaingap).
 
-{% include figure.html src="/media/hopper/results.png" alt="Final results" caption="Final Results: the lighter bars refer to results from tests on the same environment as the training (no weight shift), whereas the darker bars refer to tests on the actual testing environment (with the weight shift)" %}
+{% include figure.html src="/assets/media/hopper/results.png" alt="Final results" caption="Final Results: the lighter bars refer to results from tests on the same environment as the training (no weight shift), whereas the darker bars refer to tests on the actual testing environment (with the weight shift)" %}
 
 In the runs where Domain Randomization is applied, the difference between the two bars is lower, thus signifying that the Domain Gap has been mitigated successfully.
 
-{% include gif-like.html w="45%" src="/media/hopper/proficient.mp4" caption="Look at him go!" %}
+{% include gif-like.html w="45%" src="/assets/media/hopper/proficient.mp4" caption="Look at him go!" %}
 ___
 
 Many thanks again to [Francesco](https://github.com/Francesco-Carlucci) and [Pietro](https://github.com/PietroNoto) for sticking together through this lengthy and strenuous endeavor.

@@ -2,13 +2,24 @@
 layout: default
 ---
 
-<script src="/js/wikipedia-preview.umd.cjs"></script>
+<head>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <script src="/assets/js/wikipedia-preview.umd.cjs"></script>
+</head>
 
 <article class="post">
 
   <header class="post-header">
     {% include breadcrumbs.html %}
     <h1 class="post-title">{{ page.title | escape }}</h1>
+    {% include summary.html
+      start = page.start
+      end = page.end
+      duration = page.duration
+      languages = page.languages
+      tags = page.tags
+      media = page.media
+      summary = page.summary %}
   </header>
 
   <div class="post-content">

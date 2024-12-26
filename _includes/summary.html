@@ -1,0 +1,66 @@
+{% if include.languages %}
+    {% assign langArray = include.languages | split: "," %}
+{% endif %}
+
+{% if include.tags %}
+    {% assign tagArray = include.tags | split: "," %}
+{% endif %}
+
+<table class="summary">
+    <tr>
+        <td>
+            <ul>
+                {% if include.start and include.end %}
+                    <li>
+                        {{include.start}} - {{include.end}}
+                    </li>
+                {% else %}
+                    {% if include.start %}
+                        <li>
+                            Start: {{include.start}}
+                        </li>
+                    {% endif %}
+                    {% if include.end %}
+                        <li>
+                            End: {{include.end}}
+                        </li>
+                    {% endif %}
+                {% endif %}
+                {% if include.languages %}
+                    <li>
+                        <div class="chips">
+                            Language:
+                            {% for language in langArray %}
+                                {% include chip.html text=language %}
+                            {% endfor %}
+                        </div>
+                    </li>
+                {% endif %}
+                {% if include.tags %}
+                    <li>
+                        <div class="chips">
+                            Tags:
+                            {% for tag in tagArray %}
+                                {% include chip.html text=tag %}
+                            {% endfor %}
+                        </div>
+                    </li>
+                {% endif %}
+
+            </ul>
+        </td>
+        {% if include.media %}
+            <td rowspan="2" style="width:180px">
+                {% assign miniature-src = "/assets/media/" | append: page.title | append: "/miniature.mp4"%}
+                {% include gif-like.html src=miniature-src w=180 h=180 %}
+            </td>
+        {% endif %}
+    </tr>
+    {% if include.summary %}
+        <tr>
+            <td>
+                {{include.summary}}
+            </td>
+        </tr>
+    {% endif %}
+</table>

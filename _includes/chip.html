@@ -1,0 +1,12 @@
+{% assign text = include.text | strip %}
+
+{% if site.data.icons contains text %}
+    <div class="chip">
+        {{site.data.icons[text]}}
+        <span>
+            {{text}}
+        </span>
+    </div>
+{% else %}
+    <div class="chip">{{text}}</div>
+{% endif %}

@@ -1,7 +1,12 @@
 ---
 layout: page
-title: "Parallelizing Radray"
-categories: group project CUDA Python
+title: Radray
+start: November 2022
+end: March 2023
+duration: 2
+languages: CUDA, C, Python
+media: yes
+tags: Group Project
 ---
 This project comprised the entire final exam of the GPU Programming course. It was a three-person group project, for which we mostly took turns working in pairs, due to our separate (but equally challenging) exam schedules.
 
@@ -13,7 +18,7 @@ We were initially given total freedom in deciding what to create, as long as it 
 
 This Python utility takes a 3D description of an integrated circuit (in the form of a [GDS](https://en.wikipedia.org/wiki/GDSII) file) and calculates the energy that gets transferred to the different layers and components as a result of an [ion strike](https://en.wikipedia.org/wiki/Single-event_upset).
 
-{% include gif-like.html src="/media/radray/example.mp4" caption="A visualization of the distance-based calculations that Radray performs" %}
+{% include gif-like.html src="/assets/media/radray/example.mp4" caption="A visualization of the distance-based calculations that Radray performs" %}
 
 Our starting point was a single, mostly uncommented, multi-thousand-line Python file: as one would expect, a significant portion of our development time was taken by in-depth analysis and reverse engineering of the existing code.
 
@@ -29,9 +34,19 @@ Both the original and our version work as follows:
 
 Out of these steps, I/O on files is inherently sequential, whereas generating and calculating the energies of the points is a task that can benefit from parallel execution.
 
-> This problem is actually an example of an "embarrassingly parallel" task: since the calculations at every point are completely independent from each other (energy only depends from the point-ray distance, which is fixed for each point), parallelization leads to a speedup that scales with the number of parallel processing units.
->
-> However, a generic application can benefit from parallelization only to some extent, as most involve some sort of sequential operations, be it reading from a file or performing calculations that depend on one another. This is known as [Amdahl's Law](https://en.wikipedia.org/wiki/Amdahl%27s_law).
+{% capture embarrass %}
+
+This problem is actually an example of an "embarrassingly parallel" task: since the calculations at every point are completely independent from each other (energy only depends from the point-ray distance, which is fixed for each point), parallelization leads to a speedup that scales with the number of parallel processing units.
+
+{% endcapture %}
+{% include blockquote.html type="info" content=embarrass style="margin-bottom: 0px" %}
+
+{% capture amdahl %}
+
+However, a generic application can benefit from parallelization only to some extent, as most involve some sort of sequential operations, be it reading from a file or performing calculations that depend on one another. This is known as [Amdahl's Law](https://en.wikipedia.org/wiki/Amdahl%27s_law).
+
+{% endcapture %}
+{% include blockquote.html type="warning" content=amdahl style="margin-top: 5px" %}
 
 ## The Approach
 
@@ -39,7 +54,7 @@ For our convenience we kept the initial steps (reading the GDS file and generati
 
 After creating a sequential C version to serve as a baseline, we tried and iterated with some variations on the original algorithm.
 
-{% include gif-like.html src="/media/radray/sequential.mp4" caption="In the sequential implementation, all points at a certain timestep are calculated one after another (here figuratively moving to the CPU and back)" %}
+{% include gif-like.html src="/assets/media/radray/sequential.mp4" caption="In the sequential implementation, all points at a certain timestep are calculated one after another (here figuratively moving to the CPU and back)" %}
 
 ### Subdivision into simpler blocks
 
@@ -57,11 +72,11 @@ However, with a parallel program, every [thread](https://en.wikipedia.org/wiki/T
 
 Depending on the bounding-box-volume/actual-volume ratio of the components, this can produce a sparse array (i.e. an array for which most of its elements are empty), which is highly inefficient, considering that memory transfers between system RAM and GPU RAM (and vice versa) are one of the most common and impactful bottlenecks in parallel computations.
 
-{% include figure.html src="/media/radray/bounding_box.png" w="50%" alt="A sub-optimal component shape" caption="A sub-optimal component: its volume is a fraction of its bounding box's volume"%}
+{% include figure.html src="/assets/media/radray/bounding_box.png" w="50%" alt="A sub-optimal component shape" caption="A sub-optimal component: its volume is a fraction of its bounding box's volume"%}
 
 We solved this issue by adding an extra one-time pre-computation step, which reduces all complex shapes to simple boxes, guaranteeing that all the points are valid and thus yielding the smallest possible array.
 
-{% include figure.html src="/media/radray/decomposition.png" w="75%" alt="Polygon decomposition algorithm" caption="An example of the polygon decomposition algorithm"%}
+{% include figure.html src="/assets/media/radray/decomposition.png" w="75%" alt="Polygon decomposition algorithm" caption="An example of the polygon decomposition algorithm"%}
 
 ### Almost-parallel computation
 
@@ -71,7 +86,7 @@ We compared two slightly different implementations: one in which points are eval
 
 While the second approach is faster by itself (if thread count is not a constraint), we were limited by the fact that we ultimately needed the total accumulated energy of each point, which necessitates an extra (sequential) sum over all the timesteps. Thus the time gained by doing everything in parallel was more than compensated by the sum that needed to be performed on the host and the larger memory transfer that it required.
 
-{% include gif-like.html src="/media/radray/parallel.mp4" caption="Despite parallel threads still having to be dispatched by and retrieved from the CPU, overall computation is much faster than the sequential implementation" %}
+{% include gif-like.html src="/assets/media/radray/parallel.mp4" caption="Despite parallel threads still having to be dispatched by and retrieved from the CPU, overall computation is much faster than the sequential implementation" %}
 
 ### Visualization
 
