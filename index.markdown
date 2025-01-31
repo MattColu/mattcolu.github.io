@@ -4,6 +4,15 @@
 
 layout: home
 ---
-<div style="font-size:250px; margin: auto; text-align: center; color:#dedede">
+<link rel="stylesheet" href="/assets/css/styles.css">
+
+<div style="font-size:250px; margin-right: auto; margin-left: auto; margin-top: -50px; text-align: center; color:#dedede">
 WIP
 </div>
+<div style="margin: auto; margin-top: -50px; text-align: center; color:#bbbbbb" markdown="1">
+An original and captivating landing page is **in the works**, but it isn't ready yet...
+</div>
+
+{% for project in site.projects %}
+{% include list-summary.html page=project miniature-w="150px" miniature-h="150px" %}
+{% endfor %}

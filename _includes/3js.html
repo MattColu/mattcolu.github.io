@@ -1,4 +1,5 @@
-<div id="3js-canvas">
+<div id="3js-canvas-{{include.title}}">
+  {% if include.first %}
     <script type="importmap">
         {
           "imports": {
@@ -7,8 +8,9 @@
           }
         }
     </script>
-    <script type="module">
-      import {setupScene} from "/assets/js/three.js";
-      setupScene("{{include.title}}")
-    </script>
+  {% endif %}
+  <script type="module">
+    import {setupScene} from "/assets/js/miniatures.js";
+    setupScene("{{include.title}}", "{{include.number}}")
+  </script>
 </div>

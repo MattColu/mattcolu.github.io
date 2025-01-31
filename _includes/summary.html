@@ -1,11 +1,4 @@
-{% if include.languages %}
-    {% assign langArray = include.languages | split: "," %}
-{% endif %}
-
-{% if include.tags %}
-    {% assign tagArray = include.tags | split: "," %}
-{% endif %}
-
+{% if include.start or include.end or include.languages or include.tags or include.miniature or include.summary %}
 <table class="summary">
     <tr>
         <td>
@@ -29,8 +22,9 @@
                 {% if include.languages %}
                     <li>
                         <div class="chips">
-                            Language:
-                            {% for language in langArray %}
+                            {% assign langSize = include.languages | size %}
+                            Language{% if langSize > 1 %}s{% endif %}:
+                            {% for language in include.languages %}
                                 {% include chip.html text=language %}
                             {% endfor %}
                         </div>
@@ -40,7 +34,7 @@
                     <li>
                         <div class="chips">
                             Tags:
-                            {% for tag in tagArray %}
+                            {% for tag in include.tags %}
                                 {% include chip.html text=tag %}
                             {% endfor %}
                         </div>
@@ -49,18 +43,23 @@
 
             </ul>
         </td>
-        {% if include.media %}
-            <td rowspan="2" style="width:180px">
-                {% assign miniature-src = "/assets/media/" | append: page.title | append: "/miniature.mp4"%}
-                {% include gif-like.html src=miniature-src w=180 h=180 %}
-            </td>
+        {% if include.miniature %}
+            {% if include.miniature == "title" %}
+                {% assign miniature-src = "/assets/media/" | append: include.title | append: "/miniature.mp4" | downcase %}
+            {% else %}
+                {% assign miniature-src = include.miniature %}
+            {% endif %}
+                <td rowspan="2" style="width:180px">
+                    {% include gif-like.html src=miniature-src w="180px" h="180px" %}
+                </td>
         {% endif %}
     </tr>
     {% if include.summary %}
         <tr>
             <td>
-                {{include.summary}}
+                {{include.summary | markdownify}}
             </td>
         </tr>
     {% endif %}
 </table>
+{% endif %}

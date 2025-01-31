@@ -24,9 +24,15 @@ description: >- # this means to ignore newlines until "baseurl:"
     Code, AI, Videogames
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-#twitter_username: jekyllrb
 linkedin_username: mattcolu
 github_username: mattcolu
+
+collections:
+  projects:
+    output: true
+  
+  side-projects:
+    output: true
 
 # Build settings
 theme: minima

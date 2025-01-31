@@ -1,13 +1,9 @@
-{% capture captured_caption %}
-{{include.caption}}
-{% endcapture %}
-
 <div style="margin:auto; text-align: center">
     <figure>
         <img
             src="{{include.src}}"
             alt="{{include.alt}}"
             style="margin: auto; width: {{include.w}}; height: {{include.h}}" />
-        <figcaption markdown="1">{{captured_caption}}</figcaption>
+        <figcaption>{{include.caption | markdownify}}</figcaption>
     </figure>
 </div>

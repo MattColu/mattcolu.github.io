@@ -1,0 +1,39 @@
+<table class="summary">
+    <tr>
+        {% if include.page.miniature %}
+            {% if include.page.miniature == "title" %}
+                {% assign miniature-src = "/assets/media/" | append: include.page.title | append: "/miniature.mp4" | downcase %}
+            {% else %}
+                {% assign miniature-src = include.page.miniature %}
+            {% endif %}
+            <td rowspan="2" style="width:{{include.miniature-w}}">
+                <a href="{{include.page.url}}">
+                    {% include gif-like.html src=miniature-src w=include.miniature-w h=include.miniature-h %}
+                </a>
+            </td>
+        {% endif %}
+        <td>
+            <h1><a href="{{include.page.url}}">{{include.page.title}}</a></h1>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="chips">
+                {% for language in include.page.languages %}
+                    {% include chip.html text=language %}
+                {% endfor %}
+                <span>&nbsp;&nbsp;&nbsp;</span>
+                {% for tag in include.page.tags %}
+                    {% include chip.html text=tag %}
+                {% endfor %}
+            </div>
+        </td>  
+    </tr>
+    {% if include.page.summary %}
+        <tr>
+            <td {% if include.page.miniature %}colspan="2"{% endif %}>
+                {{include.page.summary | markdownify}}
+            </td>
+        </tr>
+    {% endif %}
+</table>

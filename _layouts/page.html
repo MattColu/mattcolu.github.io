@@ -13,12 +13,13 @@ layout: default
     {% include breadcrumbs.html %}
     <h1 class="post-title">{{ page.title | escape }}</h1>
     {% include summary.html
+      title = page.title
       start = page.start
       end = page.end
       duration = page.duration
       languages = page.languages
       tags = page.tags
-      media = page.media
+      miniature = page.miniature
       summary = page.summary %}
   </header>
 

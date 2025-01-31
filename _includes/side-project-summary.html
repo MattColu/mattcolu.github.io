@@ -1,0 +1,13 @@
+<a href="{{include.page.url}}" class="side-project-box">
+    {% if include.page.thumbnail contains "mp4" %}
+        {% include gif-like.html w="100%" h="100%" src=include.page.thumbnail %}
+    {% else %}
+        <img src="{{include.page.thumbnail}}"/>
+    {% endif %}
+    <div class="side-project-text">
+        <h3>
+            {{include.page.title}}
+        </h3>
+    </div>
+
+</a>

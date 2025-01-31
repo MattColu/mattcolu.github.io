@@ -2,6 +2,10 @@
     <i class="premonition pn-{{include.type}}"></i>
     <div class="content">
         {% if {{include.title}} %}
-            <p class="header" markdown="0">{{include.title}}</p>
+            <p class="header">{{include.title}}</p>
         {% endif %}
-        <div markdown="1">{{include.content}}</div></div></div>
+        <div>
+            {{include.content | markdownify}}
+        </div>
+    </div>
+</div>

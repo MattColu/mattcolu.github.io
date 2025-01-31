@@ -1,20 +1,18 @@
-{% capture captured_caption %}
-{{include.caption}}
-{% endcapture %}
-
-<div style="margin:auto; text-align: center">
-    <figure {% unless include.caption %} style="margin-bottom: 0px;" {% endunless %}>
-        <video 
-            width="{{include.w}}"
-            height="{{include.h}}"
-            muted
-            autoplay
-            loop
-            style="margin:auto">
-            <source
-                src="{{include.src}}"
-                type="video/mp4" />
-        </video>
-        <figcaption markdown="1">{{captured_caption}}</figcaption>
-    </figure>
+<div style="margin:auto; text-align: center;{% if include.w %} width: {{include.w}};{% endif %}{% if include.h %} height: {{include.h}};{% endif %}">
+{% if include.caption %}
+<figure style="margin-bottom: 0px;">
+{% endif %}
+<video 
+    muted
+    autoplay
+    loop
+    style="margin:auto; width: 100%; height: 100%;">
+    <source
+        src="{{include.src}}"
+        type="video/mp4" />
+</video>
+{% if include.caption %}
+<figcaption>{{include.caption | markdownify}}</figcaption>
+</figure>
+{% endif %}
 </div>

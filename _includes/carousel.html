@@ -2,41 +2,46 @@
 {% assign letters = letterstring | split: ',' %}
 {% assign number = include.number | minus: 1 %}
 <div class="carousel__holder">
-    <div id="carousel{{ number }}" class="carousel">
+  <div id="carousel{{ number }}" class="carousel">
+    {% for item in page.carousels[number].images %}
+      <input class="carousel__activator" type="radio" name="carousel{{ number }}" id="{{ number }}{{ letters[forloop.index0] }}" {% if forloop.first %}checked="checked"{% endif %} />
+    {% endfor %}
+    {% for item in page.carousels[number].images %}
+      {% if forloop.index == forloop.length %}
+        {% assign nextindex = 0 %}
+      {% else %}
+        {% assign nextindex = forloop.index0 | plus: 1 %}
+      {% endif %}
+      {% assign nextletter = letters[nextindex] %}
+      {% if forloop.index0 == 0 %}
+        {% assign previndex = forloop.length | minus: 1 %}
+      {% else %}
+        {% assign previndex = forloop.index0 | minus: 1 %}
+      {% endif %}
+      {% assign prevletter = letters[previndex] %}
+      <div class="carousel__controls">
+        <label class="carousel__control carousel__control--backward" for="{{ number }}{{ prevletter }}"></label>
+        <label class="carousel__control carousel__control--forward" for="{{ number }}{{ nextletter }}"></label>
+      </div>
+    {% endfor %}
+    <div class="carousel__track">
+      <ul>
         {% for item in page.carousels[number].images %}
-          <input class="carousel__activator" type="radio" name="carousel{{ number }}" id="{{ number }}{{ letters[forloop.index0] }}" {% if forloop.first %}checked="checked"{% endif %} />
-        {% endfor %}
-        {% for item in page.carousels[number].images %}
-          {% if forloop.index == forloop.length %}
-            {% assign nextindex = 0 %}
-          {% else %}
-            {% assign nextindex = forloop.index0 | plus: 1 %}
-          {% endif %}
-          {% assign nextletter = letters[nextindex] %}
-          {% if forloop.index0 == 0 %}
-            {% assign previndex = forloop.length | minus: 1 %}
-          {% else %}
-            {% assign previndex = forloop.index0 | minus: 1 %}
-          {% endif %}
-          {% assign prevletter = letters[previndex] %}
-          <div class="carousel__controls">
-              <label class="carousel__control carousel__control--backward" for="{{ number }}{{ prevletter }}"></label>
-              <label class="carousel__control carousel__control--forward" for="{{ number }}{{ nextletter }}"></label>
+        <li class="carousel__slide">
+          <img src="{{ item.image }}"/>
+          <div class="caption">
+            {{item.caption}}
           </div>
+        </li>
         {% endfor %}
-        <div class="carousel__track">
-          <ul>
-            {% for item in page.carousels[number].images %}
-            <li class="carousel__slide" style="background-image: url('{{ item.image }}');"></li>
-            {% endfor %}
-          </ul>
-        </div>
-        <div class="carousel__indicators">
-            {% for item in page.carousels[number].images %}
-              <label class="carousel__indicator" for="{{ number }}{{ letters[forloop.index0] }}"></label>
-            {% endfor %}
-        </div>
+      </ul>
     </div>
+    <div class="carousel__indicators">
+      {% for item in page.carousels[number].images %}
+        <label class="carousel__indicator" for="{{ number }}{{ letters[forloop.index0] }}"></label>
+      {% endfor %}
+    </div>
+  </div>
 </div>
 
 <style>
@@ -88,7 +93,7 @@
   cursor: pointer;
   border-width: 5px 5px 0 0;
   border-style: solid;
-  border-color: #fafafa;
+  border-color: #aaaaaa;
   opacity: 0.35;
   opacity: 1;
   outline: 0;
@@ -162,8 +167,19 @@
   position: absolute;
   opacity: 0;
   overflow: hidden;
+  align-content: center;
+  object-fit: contain;
 }
 .carousel__slide .overlay {height: 100%;}
+
+.carousel__slide .caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.75);
+}
 .carousel--thumb .carousel__indicator {
   height: 30px;
   width: 30px;
