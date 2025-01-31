@@ -20,7 +20,7 @@ carousels:
 I started to grow my interest in Blender in early 2021: I had already watched the entire _donut tutorial_ more than a year earlier, but never got to put that knowledge into practice.  
 All the free time that online classes brought was definitely put to good use.
 
-This page only contains smaller experiments/projects that didn't make the cut for a fully-fledged page (like [My Room](/side-projects/Room.html) or [Lofi Girl's Room](/side-projects/Lofi.html)).
+This page only contains smaller experiments/projects that didn't make the cut for a fully-fledged page (like [My Room](/side-projects/Room) or [Lofi Girl's Room](/side-projects/Lofi)).
 
 ___
 
