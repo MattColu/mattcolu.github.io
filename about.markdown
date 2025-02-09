@@ -20,7 +20,7 @@ title: About
 
 I like learning about things.
 </div>
-<div id="head-canvas" style="width: 40%"></div>
+<div id="3js-canvas-head" style="width: 40%"></div>
 </div>
 
 This is my personal portfolio site: I am not sure of its future, but for now I have set up a nice summary of all the important projects I have worked on, and a showcase of some smaller things I am also proud of.

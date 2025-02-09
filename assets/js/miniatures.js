@@ -13,7 +13,8 @@ const SETTINGS = {
         getControls: (controls) => {
             controls.target = new THREE.Vector3(0, 2, 0);
             controls.enablePan = false;
-            controls.enableZoom = false;
+            controls.enableZoom = true;
+            controls.maxDistance = 10;
         }
     },
     "Tetris": {

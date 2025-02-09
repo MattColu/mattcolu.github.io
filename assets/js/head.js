@@ -1,10 +1,10 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-const canvasElement = document.getElementById("head-canvas");
+const canvasElement = document.getElementById("3js-canvas-head");
 
 const canvasRect = canvasElement.getBoundingClientRect();
-if (canvasRect.y > window.innerHeight) canvasRect.y -= window.innerHeight;
+if (canvasRect.y > window.innerHeight) canvasRect.y %= window.innerHeight;
 
 const w = canvasElement.offsetWidth;
 const h = canvasElement.offsetWidth;
