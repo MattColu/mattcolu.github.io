@@ -13,9 +13,12 @@ tags:
 miniature: title
 summary: It's a port of Tetris, but to a godforsaken microcontroller device. Gameplay, graphics, menus, music and multiplayer features were recreated from scratch in plain C.
 ---
+
 This project was proposed as an alternative to taking the Computer Architectures exam. The position was open for multiple people, and was cooperative for its first half and individual for the second half.
 
 Although I ended up spending on this project multiple times the amount of time I would have spent simply studying for the exam itself, I received a chance to work on a personal project from start to end (which is very valuable, given the challengingly tight exam schedule) and gained new insights and (most importantly) a newfound appreciation for the C language in its most basic form.
+
+{% include toc.html %}
 
 ## The project
 
@@ -137,7 +140,7 @@ I ended up working unofficially on this project during the summer to bring it on
 
 <div style="margin:auto; text-align: center">
     <figure>
-        <iframe src="https://drive.google.com/file/d/1Os2hd0Nc4xrF_XHtmU3IijbjE22_W6rJ/preview" width="640" height="360" allowfullscreen="true"></iframe>
+        <iframe src="https://drive.google.com/file/d/1Os2hd0Nc4xrF_XHtmU3IijbjE22_W6rJ/preview" style="width: 100%; aspect-ratio: 16/9" frameborder="0" allowfullscreen="true"></iframe>
         <figcaption>A gameplay demonstration of the single player and multiplayer modes, settings menu and music.
         <br> Two other boards are off-screen and are operated by me. Each player has a miniature view of all opponents and an active target (flashing frame, not demonstrated).
         <br> As an aside, since the CPU processes both graphics and audio, and screen updates are very time-consuming (despite optimizations), the audio noticeably stops when clearing lines.</figcaption>

@@ -41,7 +41,8 @@ The miniature for [Radray](/projects/Radray) required a dedicated approach.
 As far as I'm aware, Blender's GLTF exporter does not support the animation of material properties, so the simple workflow of creating a scene in Blender, saving it as a GLTF file and loading it with Three.js was not available.
 
 I still saved the motion of the ray as an animation, but all spheres were created in-engine with Three.js: this came with the benefit of allowing me to add a few editable parameters to the scene.  
-Since I was at it, I used this occasion to practice GLSL and wrote a simple shader to interpolate the color of each sphere based on its distance from the ray.  
+Since I was at it, I used this occasion to practice GLSL and wrote a simple shader to interpolate the color of each sphere based on its distance from the ray.
+
 ___
 
 I also made a miniature of my head, which is used in the [About](/about) page.

@@ -20,12 +20,21 @@
 
 title: mattcolu
 email: mattcolu@gmail.com
+tagline: Code, AI, Videogames
 description: >- # this means to ignore newlines until "baseurl:"
-    Code, AI, Videogames
+    My portfolio of personal projects and whatnot, mostly coding and 3D art.
+    Handmade with ❤ and powered by Jekyll and Github Pages.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
+author: Matteo Colucci
 linkedin_username: mattcolu
-github_username: mattcolu
+github_username: MattColu
+
+social:
+  name: Matteo Colucci
+  links:
+    - https://www.linkedin.com/in/mattcolu
+    - https://github.com/MattColu
 
 collections:
   projects:

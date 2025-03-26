@@ -26,9 +26,12 @@ carousels:
         - image: /assets/media/thesis/freeroam_top.png
         - image: /assets/media/thesis/freeroam.png
 ---
+
 This is my thesis work for my Master's Degree in Computer Engineering.  
 Along the studies for the Artificial Intelligence branch of the degree, I realized that AI research was not the field that I wanted my thesis to be about, nor what I wanted to work on after graduation.  
 So, ultimately, this project served not only as a foray into videogame development, but also as a union between the two fields.
+
+{% include toc.html %}
 
 ## The Project
 The goal of the thesis was to develop a latency mitigation system that could be customizable to each player's driving style in a kart racing videogame.  

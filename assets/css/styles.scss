@@ -1,6 +1,7 @@
 ---
 ---
 @import "premonition";
+@import "minima";
 
 .summary {
     .chips {
@@ -40,12 +41,12 @@
 }
 
 .side-projects-holder {
-    --holder-width: 150%;
-    --text-height: 15%;
+    $holder-width: 150%;
+    $text-height: 15%;
 
     position: relative;
-    width: var(--holder-width);
-    margin-left: calc((100% - var(--holder-width))/2);
+    width: $holder-width;
+    margin-left: calc((100% - #{$holder-width})/2);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -54,7 +55,7 @@
     .side-project-box {
         display: block;
         position: relative;
-        width: 45%;
+        width: 30em;
 
         img {
             transition: filter 0.4s ease;
@@ -68,7 +69,7 @@
     .side-project-text {
         position: absolute;
         width: 100%;
-        height: var(--text-height);
+        height: $text-height;
         bottom: 0;
         left: 0;
         color: #eeeeee;
@@ -85,9 +86,69 @@
     }
 }
 
+@include media-query($on-palm) {
+    .side-projects-holder {
+        width: 100%;
+        margin: 0;
+    }
+}
+
 .custom-lil-gui.lil-gui {
     --width: 45%;
     position: absolute;
     top: 0;
     right: 0;
+}
+
+
+.table-of-contents {
+    $gutter-width: calc((100vw - #{$content-width}) / 2);
+    position: fixed;
+    top: 25%;
+    left: 0;
+    translate: calc((#{$gutter-width} - 100%));
+    //left: $spacing-unit;
+    margin-inline: auto;
+    max-width: $gutter-width;
+    max-height: 50%;
+    overflow-y: auto;
+    background-color: $grey-color-light;
+    
+    h4, table {
+        margin: 0;
+    }
+
+    th {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        padding: 1em;
+    }
+    ul {
+        list-style-type: none;
+        margin: 0 1em;
+    }
+    li:has(a.active) {
+        list-style-type: "\25B7";
+    }
+    li:has(>a.active) {
+        list-style-type: "\25B6\FE0E";
+    }
+    a {
+        display: block;
+        width: 100%;
+        
+        &.active {
+            background-color: #00000020;
+        }
+    }
+}
+
+@include media-query($on-laptop) {
+    .table-of-contents {
+        position: relative;
+        translate: 0;
+        max-width: fit-content;
+        margin: 0 0 $spacing-unit $spacing-unit;
+    }
 }

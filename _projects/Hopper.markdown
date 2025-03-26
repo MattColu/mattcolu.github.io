@@ -19,6 +19,8 @@ This project was part of the Advanced Machine Learning exam.
 It came to be the lengthiest out of all the projects of the entire degree due to an unfortunate placement with other project-based exams and to the extent of the project itself.  
 It was a three-people group project, each of us working on a specific section of it.
 
+{% include toc.html %}
+
 ## The Project
 
 The aim of this project was to teach a simulated leg how to hop in 2D.

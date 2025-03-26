@@ -1,38 +1,46 @@
+{% if include.page %}
+    {% assign project = include.page %}
+{% else if include.title %}
+    {% assign project = site.projects
+        | where_exp:"project", "project.slug == include.title" 
+        | first %}
+{% endif %}
+
 <table class="summary">
     <tr>
-        {% if include.page.miniature %}
-            {% if include.page.miniature == "title" %}
-                {% assign miniature-src = "/assets/media/" | append: include.page.title | append: "/miniature.mp4" | downcase %}
+        {% if project.miniature %}
+            {% if project.miniature == "title" %}
+                {% assign miniature-src = "/assets/media/" | append: project.title | append: "/miniature.mp4" | downcase %}
             {% else %}
-                {% assign miniature-src = include.page.miniature %}
+                {% assign miniature-src = project.miniature %}
             {% endif %}
             <td rowspan="2" style="width:{{include.miniature-w}}">
-                <a href="{{include.page.url}}">
+                <a href="{{project.url}}">
                     {% include gif-like.html src=miniature-src w=include.miniature-w h=include.miniature-h %}
                 </a>
             </td>
         {% endif %}
         <td>
-            <h1><a href="{{include.page.url}}">{{include.page.title}}</a></h1>
+            <h1><a href="{{project.url}}">{{project.title}}</a></h1>
         </td>
     </tr>
     <tr>
         <td>
             <div class="chips">
-                {% for language in include.page.languages %}
+                {% for language in project.languages %}
                     {% include chip.html text=language %}
                 {% endfor %}
                 <span>&nbsp;&nbsp;&nbsp;</span>
-                {% for tag in include.page.tags %}
+                {% for tag in project.tags %}
                     {% include chip.html text=tag %}
                 {% endfor %}
             </div>
         </td>  
     </tr>
-    {% if include.page.summary %}
+    {% if project.summary %}
         <tr>
-            <td {% if include.page.miniature %}colspan="2"{% endif %}>
-                {{include.page.summary | markdownify}}
+            <td {% if project.miniature %}colspan="2"{% endif %}>
+                {{project.summary | markdownify}}
             </td>
         </tr>
     {% endif %}

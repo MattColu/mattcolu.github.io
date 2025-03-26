@@ -12,9 +12,12 @@ tags:
 miniature: title
 summary: Re-writing someone else's messy Python code into a blazing fast parallel CUDA program is a cathartic experience.   
 ---
+
 This project comprised the entire final exam of the GPU Programming course. It was a three-person group project, for which we mostly took turns working in pairs, due to our separate (but equally challenging) exam schedules.
 
 We were initially given total freedom in deciding what to create, as long as it would leverage parallelism, but were ultimately tasked by the Professor with creating a more efficient, parallel version of an already existing piece of software.
+
+{% include toc.html %}
 
 ## The Project
 
